@@ -1,0 +1,43 @@
+version: "0.0.2"
+
+metadata:
+  name: "mermaid code generator"
+  description: "takes a prompt and converts it to mermaid code"
+  author: "bossdad"
+  private: false
+
+inputs:
+  input:
+    type: string
+    description: "input to generate mermaid code for"
+    required: true
+    example: "The quick brown fox jumps over the lazy dog"
+
+model:
+  provider: "openai"
+  name: "gpt-4o"
+
+prompt: |
+  Generate only the Mermaid diagram code for the following input: {input}. Do not include any explanations or additional text.
+
+readme: |
+  This model generates Mermaid diagram code for the given input. The model is based on GPT-4o and is fine-tuned on Mermaid diagram code generation.
+  This function performs a specific task based on the provided input parameters.
+  
+  Parameters:
+  - param1 (type): Description of the first parameter.
+  - param2 (type): Description of the second parameter.
+  - param3 (type): Description of the third parameter.
+   
+  Returns:
+  - return_type: Description of the return value.
+  
+  Example:
+  ```
+  result = function_name(param1_value, param2_value, param3_value)
+  print(result)
+  ```
+  
+  Notes:
+  - Any additional notes or important information about the function.
+  - Potential edge cases or exceptions that the function handles.
