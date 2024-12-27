@@ -21,7 +21,7 @@ const nodeCategories: NodeCategory[] = [
     items: [
       { "type": "external", "label": "AI-image", "prompt": "Enter image URL" },
       { "type": "external", "label": "AI-speech", "prompt": "Enter speech" }
-  ],
+    ],
   },
 ];
 
@@ -53,6 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
 
   const [speechText, setSpeechText] = useState('');
   const [isGeneratingSpeech, setIsGeneratingSpeech] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [imagePrompt, setImagePrompt] = useState('');
   const imageUrl = usePollinationsImage(imagePrompt, {
@@ -81,14 +82,16 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
         'Content-Type': 'application/json',
         "miraauthorization": import.meta.env.VITE_API_KEY
       },
-      body: JSON.stringify({ input:{
-        input : code.value
-      }}),
+      body: JSON.stringify({
+        input: {
+          input: code.value
+        }
+      }),
     });
     const graph = response.json().then((data) => {
       const graphData = data.result;
       const result = parseMermaid(graphData);
-      
+
       const genNodes = result.nodes;
       const genEdges = result.edges;
       setNodes((nodes) => [...nodes, ...genNodes]);
@@ -105,10 +108,10 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
     );
     // Split URL by '/'
     const parts = url.split('/');
-    
+
     // Get version from last part
     const version = parts.pop(); // removes x.x.x
-    
+
     // Join remaining parts and add version as query parameter
     return `${parts.join('/')}?Version=${version}`;
   };
@@ -140,7 +143,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
           input: formValues,
         })
       });
-  
+
       const data = await response.json();
       setApiResult(data.result);
 
@@ -167,6 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
   // Add this function for speech generation
   const generateSpeech = async () => {
     setIsGeneratingSpeech(true);
+    setErrorMessage(null); // Reset error message
     try {
       const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM', {
         method: 'POST',
@@ -182,7 +186,15 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
           }
         })
       });
-  
+
+      if (!response.ok) {
+        const errorData = await response.json();
+
+        setErrorMessage(errorData.detail.message);
+
+        throw new Error('Error generating speech');
+      }
+
       const audioBlob = await response.blob();
       const audioUrl = URL.createObjectURL(audioBlob);
       const audio = new Audio(audioUrl);
@@ -291,6 +303,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
                 >
                   {isGeneratingSpeech ? 'Generating...' : 'Generate Speech'}
                 </button>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
               </div>
             ) : selectedNode.data?.label === 'AI-image Node' ? (
               <div className="space-y-2">
@@ -306,9 +319,9 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
                     <LoadingSpinner />
                   )}
                   {imageUrl && (
-                    <img 
-                      src={imageUrl} 
-                      alt="Generated" 
+                    <img
+                      src={imageUrl}
+                      alt="Generated"
                       className="w-full rounded-lg shadow-lg"
                     />
                   )}
