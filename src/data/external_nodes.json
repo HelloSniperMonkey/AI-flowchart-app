@@ -1,0 +1,4 @@
+[
+    { "type": "external", "label": "AI-image", "prompt": "Enter image URL" },
+    { "type": "external", "label": "AI-speech", "prompt": "Enter speech" }
+]

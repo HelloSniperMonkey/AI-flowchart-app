@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback , useEffect , useState } from 'react';
 import {
   ReactFlow,
   Background,
@@ -8,19 +8,17 @@ import {
   useNodesState,
   useEdgesState,
   type OnConnect,
+  type OnEdgesDelete,
   getIncomers,
   getOutgoers,
   getConnectedEdges,
+  Edge,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
 
-import { initialNodes,  } from './nodes';
-import { initialEdges, edgeTypes } from './edges';
-
 import Sidebar from './components/Sidebar.tsx';
 import CustomNode from './components/CustomNode.tsx';
-import MermaidNode from './components/MermaidNode.tsx';
 import { PositionLoggerNode } from './nodes/PositionLoggerNode.tsx';
 
 const nodeTypes = {
@@ -31,10 +29,27 @@ const nodeTypes = {
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((edges) => addEdge(connection, edges)),
+    (params) => {
+      setEdges((currentEdges) => {
+        const targetEdges = currentEdges.filter((edge) => edge.target === params.target);
+        const newEdgeNumber = targetEdges.length + 1; // increment based on existing edges
+        const newEdge: Edge = {
+          ...params,
+          label: `Edge ${newEdgeNumber}`,
+          animated: true,  // Show data flow animation
+          data: { transferEnabled: true }
+        };
+        return addEdge(newEdge, currentEdges);
+      });
+    },
     [setEdges]
   );
+
+  const handleNodeClick = useCallback((nodeId: string, nodeType: string, nodeData: any) => {
+    setSelectedNode({ id: nodeId, type: nodeType, data: nodeData });
+  }, []);
 
   const handleNodeNameChange = useCallback((nodeId: string, newName: string) => {
       setNodes((prevNodes) =>
@@ -56,8 +71,8 @@ export default function App() {
         const reactFlowBounds = event.currentTarget.getBoundingClientRect();
         const type = event.dataTransfer.getData('application/reactflow');
         const position = {
-          x: event.clientX - reactFlowBounds.left,
-          y: event.clientY - reactFlowBounds.top,
+          x: 0,
+          y: 0,
         };
   
         let newNode;
@@ -65,13 +80,45 @@ export default function App() {
             id: String(Date.now()),
             type: 'custom',
             position,
-            data: { label: `${type} node`, onNameChange: handleNodeNameChange },
+            data: { 
+              label: `${type.charAt(0).toUpperCase() + type.slice(1)} Node`, 
+              onNameChange: handleNodeNameChange,
+              onNodeClick: handleNodeClick,
+            },
           };
         
   
         setNodes((nds) => nds.concat(newNode));
       },
-      [setNodes]
+      [setNodes, handleNodeNameChange, handleNodeClick]
+    );
+
+    const onEdgesDelete: OnEdgesDelete = useCallback(
+      (edgesToDelete) => {
+        setEdges((currentEdges) => {
+          // Remove the deleted edges
+          let updatedEdges = currentEdges.filter(
+            (e) => !edgesToDelete.find((deleted) => deleted.id === e.id)
+          );
+  
+          // Group remaining edges by their target, then renumber
+          const edgesByTarget: Record<string, Edge[]> = {};
+          for (const e of updatedEdges) {
+            edgesByTarget[e.target] = edgesByTarget[e.target] || [];
+            edgesByTarget[e.target].push(e);
+          }
+  
+          // Renumber edges in each group
+          for (const target in edgesByTarget) {
+            edgesByTarget[target].forEach((edge, index) => {
+              edge.label = `${index + 1}`;
+            });
+          }
+  
+          return [...updatedEdges];
+        });
+      },
+      [setEdges]
     );
 
     const onNodesDelete = useCallback(
@@ -101,9 +148,64 @@ export default function App() {
       [nodes, edges],
     );
 
+    const onPaneClick = useCallback(() => {
+      setSelectedNode(null);
+    }, []);
+
+    const onEdgeDoubleClick = useCallback(
+      (event: React.MouseEvent<Element, MouseEvent>, edge: Edge) => {
+        event.stopPropagation();
+        const newLabel = prompt('Enter new label:', edge.label);
+        if (newLabel !== null && newLabel !== edge.label) {
+          setEdges((eds) =>
+            eds.map((e) => (e.id === edge.id ? { ...e, label: newLabel } : e))
+          );
+        }
+      },
+      [setEdges]
+    );
+
+    const handleEdgeClick = (event: React.MouseEvent, edge: Edge) => {
+      const sourceNode = nodes.find(n => n.id === edge.source);
+      const targetNode = nodes.find(n => n.id === edge.target);
+      
+      if (sourceNode?.type === 'ainode' || sourceNode?.type === 'external') {
+        // Transfer data from source to target
+        setNodes(nodes.map(node => {
+          if (node.id === targetNode?.id) {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                input: sourceNode.data?.result || '',  // Use source node's result as input
+                previousNode: sourceNode.id
+              }
+            };
+          }
+          return node;
+        }));
+      }
+    };
+
+    useEffect(() => {
+      // Initialize with a single node
+      const initialNode: Node = {
+        id: '1',
+        type: 'custom',
+        data: { 
+          label: 'Input Node', 
+          onNameChange: handleNodeNameChange,
+          onNodeClick: handleNodeClick,
+        },
+        position: { x: 250, y: 5 },
+      };
+      setNodes([initialNode]);
+    }, [setNodes, handleNodeNameChange, handleNodeClick]);
+  
+
   return (
     <div className="flex h-screen">
-      <Sidebar nodes={nodes} edges={edges} setNodes={setNodes} setEdges={setEdges}/>
+      <Sidebar nodes={nodes} edges={edges} setNodes={setNodes} setEdges={setEdges} selectedNode={selectedNode}/>
       <div className="flex-grow">
         <ReactFlow
           nodes={nodes}
@@ -111,9 +213,13 @@ export default function App() {
           onNodesChange={onNodesChange}
           onNodesDelete={onNodesDelete}
           onEdgesChange={onEdgesChange}
+          onEdgesDelete={onEdgesDelete}
+          onPaneClick={onPaneClick}
           onConnect={onConnect}
           onDragOver={onDragOver}
           onDrop={onDrop}
+          onEdgeDoubleClick={onEdgeDoubleClick}
+          onEdgeClick={handleEdgeClick}
           nodeTypes={nodeTypes}
           fitView
           snapToGrid

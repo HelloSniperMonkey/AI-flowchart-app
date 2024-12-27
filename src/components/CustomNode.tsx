@@ -19,7 +19,7 @@ const handleStyle = {
   zIndex: 1,
 };
 
-const CustomNode = ({ data, isConnectable, id }: NodeProps) => {
+const CustomNode = ({ data, isConnectable, id, type}: NodeProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [nodeName, setNodeName] = useState(data.label);
 
@@ -43,10 +43,16 @@ const CustomNode = ({ data, isConnectable, id }: NodeProps) => {
     data.onNameChange(id, nodeName);
   }, [id, nodeName, data]);
 
+  const handleClick = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    data.onNodeClick(id, type, data);
+  }, [id, type, data]);
+
   return (
     <div 
       className="px-4 py-2 shadow-md rounded-md bg-white border-2 border-stone-400"
       onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
     >
       <Handle
         type="target"
@@ -55,27 +61,6 @@ const CustomNode = ({ data, isConnectable, id }: NodeProps) => {
         style={{ ...handleStyleT, top: -5, left: '50%' }}
         isConnectable={isConnectable}
       />
-      {/* <Handle
-        type="target"
-        position={Position.Right}
-        id="r"
-        style={{ ...handleStyle, right: -5, top: '50%' }}
-        isConnectable={isConnectable}
-      />
-      <Handle
-        type="target"
-        position={Position.Bottom}
-        id="b"
-        style={{ ...handleStyle, bottom: -5, left: '50%' }}
-        isConnectable={isConnectable}
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="l"
-        style={{ ...handleStyle, left: -5, top: '50%' }}
-        isConnectable={isConnectable}
-      /> */}
       {isEditing ? (
         <input
           type="text"
@@ -89,13 +74,6 @@ const CustomNode = ({ data, isConnectable, id }: NodeProps) => {
       ) : (
         <div className="font-bold text-center">{nodeName}</div>
       )}
-      {/* <Handle
-        type="source"
-        position={Position.Top}
-        id="t"
-        style={{ ...handleStyle, top: -5, left: '50%' }}
-        isConnectable={isConnectable}
-      /> */}
       <Handle
         type="source"
         position={Position.Bottom}
