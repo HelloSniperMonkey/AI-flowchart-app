@@ -158,6 +158,14 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
         if (targetNode?.data?.label === 'AI-image Node') {
           setImagePrompt(data.result);
         }
+        if (targetNode?.data?.type === 'ainode') {
+          console.log('Setting data for node:', targetNode.data.label);
+          Object.entries(targetNode.data).forEach(([key, value]) => {
+            if (!['type', 'label', 'url'].includes(key)) {
+              setFormValues(prev => ({ ...prev, [key]: data.result }));
+            }
+          });
+        }
       });
 
     } catch (error) {
@@ -189,9 +197,11 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
 
       if (!response.ok) {
         const errorData = await response.json();
-
-        setErrorMessage(errorData.detail.message);
-
+        if (errorData.detail && errorData.detail.status === 'missing_permissions') {
+          setErrorMessage('The API key you used is missing the permission text_to_speech to execute this operation.');
+        } else {
+          setErrorMessage('An error occurred while generating speech.');
+        }
         throw new Error('Error generating speech');
       }
 
@@ -219,6 +229,16 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
       setApiResult(null);
     }
   }, [selectedNode]);
+
+  const copyToClipboard = () => {
+    if (apiResult) {
+      navigator.clipboard.writeText(apiResult).then(() => {
+        console.log('Copied to clipboard');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  };
 
   return (
     <aside className="w-64 bg-gray-100 p-4 overflow-y-auto flex flex-col h-full">
@@ -363,6 +383,9 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
                 <p>Loading...</p>
               ) : apiResult ? (
                 <div className="p-2 border mb-2">
+                  <button onClick={copyToClipboard} className='bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600'>
+                    Copy to Clipboard
+                  </button>
                   <strong>Response:</strong> {apiResult}
                 </div>
               ) : null}
