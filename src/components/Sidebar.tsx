@@ -86,10 +86,9 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
       }}),
     });
     const graph = response.json().then((data) => {
-      console.log(data.result)
       const graphData = data.result;
       const result = parseMermaid(graphData);
-      console.log(result.nodes, result.edges);
+      
       const genNodes = result.nodes;
       const genEdges = result.edges;
       setNodes((nodes) => [...nodes, ...genNodes]);

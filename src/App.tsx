@@ -27,8 +27,8 @@ const nodeTypes = {
 };
 
 export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const onConnect: OnConnect = useCallback(
     (params) => {
@@ -220,7 +220,6 @@ export default function App() {
           onDrop={onDrop}
           onEdgeDoubleClick={onEdgeDoubleClick}
           onEdgeClick={handleEdgeClick}
-          nodeTypes={nodeTypes}
           fitView
           snapToGrid
           snapGrid={[15, 15]}
