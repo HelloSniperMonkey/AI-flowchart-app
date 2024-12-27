@@ -220,6 +220,7 @@ export default function App() {
           onDrop={onDrop}
           onEdgeDoubleClick={onEdgeDoubleClick}
           onEdgeClick={handleEdgeClick}
+          nodeTypes={nodeTypes}
           fitView
           snapToGrid
           snapGrid={[15, 15]}

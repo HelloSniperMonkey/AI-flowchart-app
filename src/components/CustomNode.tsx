@@ -58,7 +58,7 @@ const CustomNode = ({ data, isConnectable, id, type}: NodeProps) => {
         type="target"
         position={Position.Top}
         id="t"
-        style={{ ...handleStyleT, top: -5, left: '50%' }}
+        style={{ ...handleStyleT, top: 0, left: '50%' }}
         isConnectable={isConnectable}
       />
       {isEditing ? (
@@ -78,21 +78,21 @@ const CustomNode = ({ data, isConnectable, id, type}: NodeProps) => {
         type="source"
         position={Position.Bottom}
         id="b"
-        style={{ ...handleStyle, bottom: -5, left: '50%' }}
+        style={{ ...handleStyle, bottom: 0, left: '50%' }}
         isConnectable={isConnectable}
       />
       <Handle
         type="source"
         position={Position.Right}
         id="r"
-        style={{ ...handleStyle, right: -5, top: '50%' }}
+        style={{ ...handleStyle, right: 0, top: '50%' }}
         isConnectable={isConnectable}
       />
       <Handle
         type="source"
         position={Position.Left}
         id="l"
-        style={{ ...handleStyle, left: -5, top: '50%' }}
+        style={{ ...handleStyle, left: 0, top: '50%' }}
         isConnectable={isConnectable}
       />
     </div>
