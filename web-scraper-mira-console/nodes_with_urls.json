@@ -1,0 +1,517 @@
+[
+    {
+        "type": "ainode",
+        "label": "human-like-chat-bot",
+        "url": "https://console.mira.network/flows/karoly/human-like-chat-bot/0.0.4"
+    },
+    {
+        "type": "ainode",
+        "label": "rap-song-generator",
+        "url": "https://console.mira.network/flows/venmus/rap-song-generator/0.0.2",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "mood-analysis-chatbot",
+        "url": "https://console.mira.network/flows/jaymalladi/mood-analysis-chatbot/1.1.1",
+        "mood": ""
+    },
+    {
+        "type": "ainode",
+        "label": "clothing-suggestion-generator",
+        "url": "https://console.mira.network/flows/anand/clothing-suggestion-generator/1.0.0",
+        "age": "",
+        "height": "",
+        "skin_tone": "",
+        "color_preferences": ""
+    },
+    {
+        "type": "ainode",
+        "label": "ai-astrologer",
+        "url": "https://console.mira.network/flows/cosmic-labs/ai-astrologer/1.0.0",
+        "question": "",
+        "birth_details": ""
+    },
+    {
+        "type": "ainode",
+        "label": "blog-post-generator",
+        "url": "https://console.mira.network/flows/super-labs/blog-post-generator/1.0.3",
+        "blog_topic": "",
+        "content_type": "",
+        "audience_requirements": ""
+    },
+    {
+        "type": "ainode",
+        "label": "cropwise-ai",
+        "url": "https://console.mira.network/flows/rishi/cropwise-ai/0.0.2",
+        "Crop": "",
+        "Region": "",
+        "Soil_Type": "",
+        "Rainfall_mm": "",
+        "Fertilizer_Used": "",
+        "Irrigation_Used": "",
+        "Weather_Condition": "",
+        "Temperature_Celsius": ""
+    },
+    {
+        "type": "ainode",
+        "label": "twitter-content-generator",
+        "url": "https://console.mira.network/flows/anand/twitter-content-generator/1.0.1",
+        "tone": "",
+        "context": "",
+        "perspective": "",
+        "content_type": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Movie Recommendation System",
+        "url": "https://console.mira.network/flows/shivam/Movie%20Recommendation%20System/0.0.3",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "elemental-flow-generator",
+        "url": "https://console.mira.network/flows/satya/elemental-flow-generator/1.0.2",
+        "flow_name": "",
+        "author_name": "",
+        "dataset_name": "",
+        "flow_purpose": "",
+        "input_definitions": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Tell Me More",
+        "url": "https://console.mira.network/flows/swapnilsaysloud/Tell%20Me%20More/0.0.1",
+        "title": "",
+        "topic": "",
+        "content": ""
+    },
+    {
+        "type": "ainode",
+        "label": "mira-qna",
+        "url": "https://console.mira.network/flows/venmus/mira-qna/0.0.2",
+        "question": ""
+    },
+    {
+        "type": "ainode",
+        "label": "mindfulness-guide",
+        "url": "https://console.mira.network/flows/jaymalladi/mindfulness-guide/1.0.3",
+        "stress_level": "",
+        "time_available": ""
+    },
+    {
+        "type": "ainode",
+        "label": "rap-song-generator",
+        "url": "https://console.mira.network/flows/sasmit/rap-song-generator/0.0.2",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "recipe generator",
+        "url": "https://console.mira.network/flows/sahasrakruthi/recipe%20generator/0.1.11",
+        "dish": "",
+        "specification": ""
+    },
+    {
+        "type": "ainode",
+        "label": "karan-mira-clone",
+        "url": "https://console.mira.network/flows/flamekaiser/karan-mira-clone/0.0.2",
+        "question": ""
+    },
+    {
+        "type": "ainode",
+        "label": "professional-email-writer",
+        "url": "https://console.mira.network/flows/cosmic-labs/professional-email-writer/0.1.0",
+        "tone": "",
+        "context": "",
+        "email_purpose": ""
+    },
+    {
+        "type": "ainode",
+        "label": "gpt-chat",
+        "url": "https://console.mira.network/flows/satya/gpt-chat/0.0.1",
+        "input": ""
+    },
+    {
+        "type": "ainode",
+        "label": "holiday-planner",
+        "url": "https://console.mira.network/flows/shaswat-suman/holiday-planner/0.0.1",
+        "daysofvisit": "",
+        "destination": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Investor Magnet",
+        "url": "https://console.mira.network/flows/prasad178/Investor%20Magnet/0.0.5",
+        "team": "",
+        "founders": "",
+        "industry": "",
+        "traction": "",
+        "challenges": "",
+        "funding_goal": "",
+        "startup_name": "",
+        "business_model": "",
+        "current_revenue": "",
+        "current_investors": "",
+        "mission_statement": "",
+        "additional_details": "",
+        "market_opportunity": "",
+        "competitive_advantage": "",
+        "financial_projections": "",
+        "product_or_service_description": ""
+    },
+    {
+        "type": "ainode",
+        "label": "twitter-clone-workflow-generator",
+        "url": "https://console.mira.network/flows/anand/twitter-clone-workflow-generator/1.0.0",
+        "tone": "",
+        "context": "",
+        "key_features": "",
+        "platform_name": ""
+    },
+    {
+        "type": "ainode",
+        "label": "personal-budget-optimizer",
+        "url": "https://console.mira.network/flows/cosmic-labs/personal-budget-optimizer/1.0.0",
+        "savings_goal": "",
+        "fixed_expenses": "",
+        "monthly_income": "",
+        "variable_expenses": ""
+    },
+    {
+        "type": "ainode",
+        "label": "flow-generator",
+        "url": "https://console.mira.network/flows/satya/flow-generator/1.0.1",
+        "flow_name": "",
+        "author_name": "",
+        "dataset_name": "",
+        "flow_purpose": "",
+        "input_definitions": ""
+    },
+    {
+        "type": "ainode",
+        "label": "startup-guidelines-generator",
+        "url": "https://console.mira.network/flows/anand/startup-guidelines-generator/1.0.1",
+        "idea": "",
+        "field": "",
+        "funding_received": ""
+    },
+    {
+        "type": "ainode",
+        "label": "travel guide",
+        "url": "https://console.mira.network/flows/shaswat-suman/travel%20guide/0.0.1",
+        "daysofvisit": "",
+        "destination": ""
+    },
+    {
+        "type": "ainode",
+        "label": "college-essay-generator",
+        "url": "https://console.mira.network/flows/sarthak-p/college-essay-generator/1.0.4",
+        "major": "",
+        "topic": "",
+        "words": "",
+        "institute": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Chat With Me",
+        "url": "https://console.mira.network/flows/swapnilsaysloud/Chat%20With%20Me/0.0.1",
+        "context": "",
+        "question": ""
+    },
+    {
+        "type": "ainode",
+        "label": "alexandre-dumas-impersonator",
+        "url": "https://console.mira.network/flows/sarim/alexandre-dumas-impersonator/0.1.1",
+        "user_message": ""
+    },
+    {
+        "type": "ainode",
+        "label": "polygon-stack",
+        "url": "https://console.mira.network/flows/venmus/polygon-stack/0.0.1",
+        "question": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Gift-Curator",
+        "url": "https://console.mira.network/flows/nimmagaddakumudahasini/Gift-Curator/1.0.0",
+        "Name": "",
+        "Budget": "",
+        "Gender": "",
+        "Boolean": "",
+        "Location": "",
+        "Occasion": "",
+        "Age Group": "",
+        "Interests": "",
+        "Preferences": "",
+        "Relationship": ""
+    },
+    {
+        "type": "ainode",
+        "label": "ReadNext (Book Recommendation System)",
+        "url": "https://console.mira.network/flows/shivam/ReadNext%20(Book%20Recommendation%20System)/0.0.1",
+        "genre": "",
+        "style": "",
+        "author": "",
+        "length": "",
+        "previous_book": ""
+    },
+    {
+        "type": "ainode",
+        "label": "life-pathway-roadmap-generator",
+        "url": "https://console.mira.network/flows/anand/life-pathway-roadmap-generator/1.0.0",
+        "goals": "",
+        "skills": "",
+        "timeline": "",
+        "field_of_interest": "",
+        "current_qualification": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Poetry Generator",
+        "url": "https://console.mira.network/flows/varunkumar0x10/Poetry%20Generator/0.0.1",
+        "input1": "",
+        "input2": "",
+        "input3": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Chuttiyaa_helper",
+        "url": "https://console.mira.network/flows/shresth/Chuttiyaa_helper/0.0.2",
+        "month": "",
+        "howmanydays": ""
+    },
+    {
+        "type": "ainode",
+        "label": "smart-contract-deployment-guide",
+        "url": "https://console.mira.network/flows/flamekaiser/smart-contract-deployment-guide/0.0.1",
+        "contract_type": "",
+        "deployment_method": "",
+        "frontend_framework": ""
+    },
+    {
+        "type": "ainode",
+        "label": "product-review-analyzer",
+        "url": "https://console.mira.network/flows/sarim/product-review-analyzer/0.1.2",
+        "review_text": "",
+        "product_category": ""
+    },
+    {
+        "type": "ainode",
+        "label": "rap-song-generator",
+        "url": "https://console.mira.network/flows/wafflebytes/rap-song-generator/0.0.2",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Code-Helper",
+        "url": "https://console.mira.network/flows/shresth/Code-Helper/0.0.2",
+        "code": "",
+        "lang": "",
+        "size": "",
+        "error": ""
+    },
+    {
+        "type": "ainode",
+        "label": "mermaid code generator",
+        "url": "https://console.mira.network/flows/bossdad/mermaid%20code%20generator/0.0.2",
+        "input": ""
+    },
+    {
+        "type": "ainode",
+        "label": "Stream_Your_Favorites",
+        "url": "https://console.mira.network/flows/crazy-dev/Stream_Your_Favorites/0.0.2",
+        "name": "",
+        "language": "",
+        "FreePaidFinder": ""
+    },
+    {
+        "type": "ainode",
+        "label": "diet-plan-generator",
+        "url": "https://console.mira.network/flows/venkatesh-mira/diet-plan-generator/0.0.1",
+        "age": "",
+        "height": "",
+        "weight": "",
+        "desired-time": "",
+        "desired-weight": ""
+    },
+    {
+        "type": "ainode",
+        "label": "product-description-generator",
+        "url": "https://console.mira.network/flows/cosmic-labs/product-description-generator/1.0.0",
+        "product_name": "",
+        "target_market": "",
+        "product_category": ""
+    },
+    {
+        "type": "ainode",
+        "label": "resume-analyser",
+        "url": "https://console.mira.network/flows/cosmic-labs/resume-analyser/1.0.0",
+        "resume_query": ""
+    },
+    {
+        "type": "ainode",
+        "label": "django-coding-assistant",
+        "url": "https://console.mira.network/flows/cosmic-labs/django-coding-assistant/1.0.0",
+        "query": ""
+    },
+    {
+        "type": "ainode",
+        "label": "recipe-remixer",
+        "url": "https://console.mira.network/flows/cosmic-labs/recipe-remixer/1.0.3",
+        "remix_style": "",
+        "original_recipe": ""
+    },
+    {
+        "type": "ainode",
+        "label": "email-assistant",
+        "url": "https://console.mira.network/flows/prasad178/email-assistant/0.1.1",
+        "topic": "",
+        "length": "",
+        "details": ""
+    },
+    {
+        "type": "ainode",
+        "label": "alexandre-dumas-twitter",
+        "url": "https://console.mira.network/flows/sarim/alexandre-dumas-twitter/0.1.1"
+    },
+    {
+        "type": "ainode",
+        "label": "puzzle-riddle-generator",
+        "url": "https://console.mira.network/flows/anand/puzzle-riddle-generator/1.0.0",
+        "count": "",
+        "category": "",
+        "difficulty": "",
+        "field_of_interest": ""
+    },
+    {
+        "type": "ainode",
+        "label": "advanced-rap-creator",
+        "url": "https://console.mira.network/flows/cosmic-labs/advanced-rap-creator/0.1.1",
+        "rap_style": "",
+        "rap_topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "prompt to bullet points",
+        "url": "https://console.mira.network/flows/bossdad/prompt%20to%20bullet%20points/0.0.1",
+        "sentence": "",
+        "word_count": ""
+    },
+    {
+        "type": "ainode",
+        "label": "rap-song-generator",
+        "url": "https://console.mira.network/flows/pranjal/rap-song-generator/0.0.1",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "portfolio-risk-analyzer",
+        "url": "https://console.mira.network/flows/cosmic-labs/portfolio-risk-analyzer/1.0.0",
+        "risk_tolerance": "",
+        "investment_goals": "",
+        "investment_horizon": "",
+        "portfolio_holdings": ""
+    },
+    {
+        "type": "ainode",
+        "label": "loan-repayment-strategist",
+        "url": "https://console.mira.network/flows/cosmic-labs/loan-repayment-strategist/1.0.0",
+        "loan_details": "",
+        "monthly_income": "",
+        "priority_method": "",
+        "available_payment": ""
+    },
+    {
+        "type": "ainode",
+        "label": "stock-fundamental-analyzer",
+        "url": "https://console.mira.network/flows/cosmic-labs/stock-fundamental-analyzer/1.0.0",
+        "company_ticker": "",
+        "growth_metrics": "",
+        "financial_metrics": "",
+        "industry_comparison": ""
+    },
+    {
+        "type": "ainode",
+        "label": "retirement-planning-calculator",
+        "url": "https://console.mira.network/flows/cosmic-labs/retirement-planning-calculator/1.0.0",
+        "current_age": "",
+        "risk_profile": "",
+        "retirement_age": "",
+        "current_savings": "",
+        "expected_expenses": "",
+        "monthly_contribution": ""
+    },
+    {
+        "type": "ainode",
+        "label": "song-generator",
+        "url": "https://console.mira.network/flows/shaswat-suman/song-generator/0.0.1",
+        "style": "",
+        "topic": ""
+    },
+    {
+        "type": "ainode",
+        "label": "fact-checker",
+        "url": "https://console.mira.network/flows/flugel/fact-checker/0.1.1",
+        "rap_style": "",
+        "fact_to_check": ""
+    },
+    {
+        "type": "ainode",
+        "label": "resume-achievement-writer",
+        "url": "https://console.mira.network/flows/cosmic-labs/resume-achievement-writer/0.1.0",
+        "metrics": "",
+        "industry": "",
+        "job_responsibility": ""
+    },
+    {
+        "type": "ainode",
+        "label": "product-description-writer",
+        "url": "https://console.mira.network/flows/cosmic-labs/product-description-writer/0.1.0",
+        "target_market": "",
+        "product_details": "",
+        "unique_selling_points": ""
+    },
+    {
+        "type": "ainode",
+        "label": "technical-documentation-writer",
+        "url": "https://console.mira.network/flows/cosmic-labs/technical-documentation-writer/0.1.0",
+        "user_level": "",
+        "feature_name": "",
+        "technical_details": ""
+    },
+    {
+        "type": "ainode",
+        "label": "CropWise AI",
+        "url": "https://console.mira.network/flows/rishi/CropWise%20AI/0.0.1",
+        "Crop": "",
+        "Region": "",
+        "Soil_Type": "",
+        "Rainfall_mm": "",
+        "Fertilizer_Used": "",
+        "Irrigation_Used": "",
+        "Weather_Condition": "",
+        "Temperature_Celsius": ""
+    },
+    {
+        "type": "ainode",
+        "label": "food-waste-management-system",
+        "url": "https://console.mira.network/flows/kashishrai/food-waste-management-system/1.0.0",
+        "location": "",
+        "quantity": "",
+        "food_type": "",
+        "charity_location": ""
+    },
+    {
+        "type": "ainode",
+        "label": "medical-assistance-ai-flow",
+        "url": "https://console.mira.network/flows/shivam/medical-assistance-ai-flow/0.1.0",
+        "location": "",
+        "symptoms": ""
+    }
+]
