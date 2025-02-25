@@ -11,7 +11,7 @@
   "dependencies": {
     "@pollinations/react": "^2.0.7",
     "@types/dotenv": "^6.1.1",
-    "@xyflow/react": "^12.4.1",
+    "@xyflow/react": "^12.4.4",
     "autoprefixer": "^10.4.20",
     "dotenv": "^16.4.7",
     "lucide-react": "^0.469.0",
