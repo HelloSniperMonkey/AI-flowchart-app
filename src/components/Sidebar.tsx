@@ -73,32 +73,38 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
   };
 
   const graphGenerate = async () => {
-
     const code = document.getElementById('mermaid-code') as HTMLTextAreaElement;
-    const apiUrl = 'https://flow-api.mira.network/v1/flows/flows/bossdad/mermaid-code-generator?version=0.0.2';
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        "miraauthorization": import.meta.env.VITE_API_KEY
-      },
-      body: JSON.stringify({
-        input: {
-          input: code.value
-        }
-      }),
-    });
-    const graph = response.json().then((data) => {
-      const graphData = data.result;
+    
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `Convert this text to a mermaid diagram and only return the mermaid code: ${code.value}`
+            }]
+          }]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const graphData = data.candidates[0].content.parts[0].text;
       const result = parseMermaid(graphData);
 
       const genNodes = result.nodes;
       const genEdges = result.edges;
       setNodes((nodes) => [...nodes, ...genNodes]);
       setEdges((edges) => [...edges, ...genEdges]);
-    }).catch((error) => {
+    } catch (error) {
       console.error("Error:", error);
-    });
+    }
   }
 
   const transformUrl = (url: string): string => {
@@ -125,44 +131,45 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedNode, nodes, edges, setNodes,
       return;
     }
 
-    const url = matchingNode.url;
-    if (!url) {
-      console.error('No URL found for node');
-      return;
-    }
-    console.log(import.meta.env.BACKEND_API);
-    console.log(transformUrl(url));
     try {
-      const response = await fetch(transformUrl(url), {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'miraauthorization': import.meta.env.VITE_API_KEY
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          input: formValues,
+          contents: [{
+            parts: [{
+              text: formValues.input || 'Please provide input'
+            }]
+          }]
         })
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
-      setApiResult(data.result);
+      const result = data.candidates[0].content.parts[0].text;
+      setApiResult(result);
 
       // Find connected nodes
       const connectedEdges = edges.filter(edge => edge.source === selectedNode.id);
       connectedEdges.forEach(edge => {
         const targetNode = nodes.find(n => n.id === edge.target);
         if (targetNode?.data?.label === 'AI-speech Node') {
-          setSpeechText(data.result);
+          setSpeechText(result);
           if (autoTrigger) generateSpeech();
         }
         if (targetNode?.data?.label === 'AI-image Node') {
-          setImagePrompt(data.result);
+          setImagePrompt(result);
         }
         if (targetNode?.data?.type === 'ainode') {
           console.log('Setting data for node:', targetNode.data.label);
           Object.entries(targetNode.data).forEach(([key, value]) => {
             if (!['type', 'label', 'url'].includes(key)) {
-              setFormValues(prev => ({ ...prev, [key]: data.result }));
+              setFormValues(prev => ({ ...prev, [key]: result }));
             }
           });
         }
